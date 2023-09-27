@@ -9,8 +9,6 @@ public class Busca
             return null;
         }
 
-        // Console.Write(arvore.Valor + " ");
-
         if (arvore.Valor == numero)
         {
             return arvore;

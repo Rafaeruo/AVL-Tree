@@ -11,14 +11,14 @@ public class Edicao
     }
     public Arvore Inserir(Arvore arvore, int numero)
     {
-        var nodoExistente = busca.Buscar(arvore, numero);
-
-        if (nodoExistente is not null)
+        if (arvore is null)
         {
             return arvore;
         }
 
-        if (arvore is null)
+        var nodoExistente = busca.Buscar(arvore, numero);
+
+        if (nodoExistente is not null)
         {
             return arvore;
         }
@@ -62,8 +62,8 @@ public class Edicao
 
     private Arvore Balancear(Arvore arvore)
     {
-        if ((arvore.Esquerda is not null && arvore.Esquerda.FatorBalanceamento() > 0 && arvore.Esquerda.Esquerda is not null && arvore.Esquerda.Esquerda.FatorBalanceamento() > 0)
-            || (arvore.Direita is not null && arvore.Direita.FatorBalanceamento() < 0 && arvore.Direita.Direita is not null && arvore.Direita.Direita.FatorBalanceamento() < 0))
+        if ((arvore.FatorBalanceamento() > 0 && arvore.Esquerda is not null && arvore.Esquerda.FatorBalanceamento() > 0)
+            || (arvore.FatorBalanceamento() < 0 && arvore.Direita is not null && arvore.Direita.FatorBalanceamento() < 0))
         {
             return BalancearSimples(arvore);
         }
@@ -114,14 +114,14 @@ public class Edicao
 
     public Arvore Excluir(Arvore arvore, int numero)
     {
-        var nodoExistente = busca.Buscar(arvore, numero);
-
-        if (nodoExistente is null)
+        if (arvore is null)
         {
             return arvore;
         }
 
-        if (arvore is null)
+        var nodoExistente = busca.Buscar(arvore, numero);
+
+        if (nodoExistente is null)
         {
             return arvore;
         }
@@ -170,7 +170,7 @@ public class Edicao
         return arvore;
     }
 
-    public Arvore ExclusaoPorCopia(Arvore arvore)
+    private Arvore ExclusaoPorCopia(Arvore arvore)
     {
         var maiorAEsquerda = MaiorNodoNaSubarvore(arvore: arvore.Esquerda);
         arvore.Valor = maiorAEsquerda.Valor;
@@ -179,7 +179,7 @@ public class Edicao
         return arvore;
     }
 
-    public Arvore MaiorNodoNaSubarvore(Arvore arvore)
+    private Arvore MaiorNodoNaSubarvore(Arvore arvore)
     {
         while (arvore.Direita != null)
         {

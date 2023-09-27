@@ -9,7 +9,7 @@ public class Percorrer
             return;
         }
 
-        Console.Write(arvore.Valor + ", ");
+        Console.Write(arvore.Valor + " ");
 
         PreOrdem(arvore.Esquerda);
         PreOrdem(arvore.Direita);
@@ -25,7 +25,7 @@ public class Percorrer
         PosOrdem(arvore.Esquerda);
         PosOrdem(arvore.Direita);
 
-        Console.Write(arvore.Valor + " FB: " + ", ");
+        Console.Write(arvore.Valor + " ");
     }
 
     public void EmOrdem(Arvore arvore)
@@ -36,7 +36,7 @@ public class Percorrer
         }
 
         EmOrdem(arvore.Esquerda);
-        Console.Write(arvore.Valor + " FB: " + ", ");
+        Console.Write(arvore.Valor + " ");
         EmOrdem(arvore.Direita);
     }
 }
