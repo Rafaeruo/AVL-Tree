@@ -23,14 +23,14 @@ public class Menu
                 arvore.ExibirTabulacao();
             } 
             else if (opcao == 2) {
-                arvore = edicao.Inserir(arvore, ObterInteiroEntrada());
+                arvore = edicao.Inserir(arvore, ObterInteiroEntrada("Número inteiro para inserir: "));
             }
             else if (opcao == 3) {
-                arvore = edicao.Excluir(arvore, ObterInteiroEntrada());
+                arvore = edicao.Excluir(arvore, ObterInteiroEntrada("Número inteiro para excluir: "));
 
                 if (arvore is null)
                 {
-                    Console.WriteLine("Nodo raíz excluído, recriando a árvore de raíz."); // TODO ver todos os casos de exclusao de raiz p/ ver se ta ok
+                    Console.WriteLine("Nodo raíz excluído, recriando a árvore.");
                     InicializarArvore();
                 }
             }
@@ -39,14 +39,17 @@ public class Menu
                 Console.WriteLine(nodoEncontrado is null ? "Não há nenhum nodo com esse valor ná árvore" : "Há um nodo com esse valor na árvore");
             }
             else if (opcao == 5) {
+                Console.Write("Pré-ordem: ");
                 percorrer.PreOrdem(arvore);
                 Console.WriteLine();
             }
             else if (opcao == 6) {
+                Console.Write("Pós-ordem: ");
                 percorrer.PosOrdem(arvore);
                 Console.WriteLine();
             }
             else if (opcao == 7) {
+                Console.Write("Em-ordem: ");
                 percorrer.EmOrdem(arvore);
                 Console.WriteLine();
             }
@@ -56,13 +59,15 @@ public class Menu
             else {
                 Console.WriteLine("Opção inválida");
             }
+
+            Console.WriteLine();
+            Thread.Sleep(300);
         }
     }
 
     private void InicializarArvore()
     {
-        Console.WriteLine("Digite o valor inteiro do nodo raíz da árvore");
-        var valorRaiz = ObterInteiroEntrada();
+        var valorRaiz = ObterInteiroEntrada("Digite o valor inteiro do nodo raíz da árvore: ");
         arvore = new Arvore(valorRaiz);
     }
 
@@ -79,11 +84,13 @@ public class Menu
         Console.WriteLine("7 - Encaminhamento em-ordem");
         Console.WriteLine("8 - Sair");
 
-        return ObterInteiroEntrada();
+        return ObterInteiroEntrada("Opção: ");
     }
 
-    private int ObterInteiroEntrada()
+    private int ObterInteiroEntrada(string pergunta = null)
     {
+        pergunta ??= "Insira um número inteiro: ";
+        Console.Write(pergunta);
         var entrada = Console.ReadLine();
         _ = int.TryParse(entrada, out var opcao);
         return opcao;

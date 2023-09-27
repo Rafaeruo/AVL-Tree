@@ -37,7 +37,7 @@ public class Arvore
 
     public override string ToString()
     {
-        return "Valor: " + Valor + " FB: " + FatorBalanceamento();
+        return Valor.ToString();
     }
 
     public void ExibirTabulacao(int profundidade = 0)
