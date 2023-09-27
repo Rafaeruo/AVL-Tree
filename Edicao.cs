@@ -62,8 +62,8 @@ public class Edicao
 
     private Arvore Balancear(Arvore arvore)
     {
-        if ((arvore.FatorBalanceamento() > 0 && arvore.Esquerda is not null && arvore.Esquerda.FatorBalanceamento() > 0)
-            || (arvore.FatorBalanceamento() < 0 && arvore.Direita is not null && arvore.Direita.FatorBalanceamento() < 0))
+        if ((arvore.FatorBalanceamento() > 0 && arvore.Esquerda is not null && arvore.Esquerda.FatorBalanceamento() >= 0)
+            || (arvore.FatorBalanceamento() < 0 && arvore.Direita is not null && arvore.Direita.FatorBalanceamento() <= 0))
         {
             return BalancearSimples(arvore);
         }
@@ -99,7 +99,7 @@ public class Edicao
 
     private Arvore BalancearDuplo(Arvore arvore)
     {
-        var aDireita = arvore.FatorBalanceamento() == 2;
+        var aDireita = arvore.FatorBalanceamento() > 0;
         if (aDireita)
         {
             arvore.Esquerda = BalancearSimples(arvore.Esquerda);
