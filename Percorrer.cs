@@ -1,8 +1,8 @@
 namespace ArvoreAvl;
 
-public class Percorrer
+public class Percorrer<T>
 {
-    public void PreOrdem(Arvore arvore)
+    public void PreOrdem(Arvore<T> arvore)
     {
         if (arvore is null)
         {
@@ -15,7 +15,7 @@ public class Percorrer
         PreOrdem(arvore.Direita);
     }
 
-    public void PosOrdem(Arvore arvore)
+    public void PosOrdem(Arvore<T> arvore)
     {
         if (arvore is null)
         {
@@ -28,7 +28,7 @@ public class Percorrer
         Console.Write(arvore.Valor + " ");
     }
 
-    public void EmOrdem(Arvore arvore)
+    public void EmOrdem(Arvore<T> arvore)
     {
         if (arvore is null)
         {

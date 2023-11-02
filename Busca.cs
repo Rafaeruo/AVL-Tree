@@ -1,24 +1,24 @@
 namespace ArvoreAvl;
 
-public class Busca
+public class Busca<T>
 {
-    public Arvore Buscar(Arvore arvore, int numero)
+    public Arvore<T> Buscar(Arvore<T> arvore, T valor)
     {
         if (arvore is null)
         {
             return null;
         }
 
-        if (arvore.Valor == numero)
+        if (arvore.IgualA(valor))
         {
             return arvore;
         }
 
-        if (numero > arvore.Valor)
+        if (arvore.MenorQue(valor))
         {
-            return Buscar(arvore.Direita, numero);
+            return Buscar(arvore.Direita, valor);
         }
 
-        return Buscar(arvore.Esquerda, numero);
+        return Buscar(arvore.Esquerda, valor);
     }
 }

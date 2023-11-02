@@ -1,13 +1,15 @@
+using ArvoreAvl.Comparadores;
+
 namespace ArvoreAvl;
 
 public class Menu
 {
-    private Arvore arvore;
-    private readonly Busca busca;
-    private readonly Edicao edicao;
-    private readonly Percorrer percorrer;
+    private Arvore<int> arvore;
+    private readonly Busca<int> busca;
+    private readonly Edicao<int> edicao;
+    private readonly Percorrer<int> percorrer;
 
-    public Menu(Busca busca, Edicao edicao, Percorrer percorrer) {
+    public Menu(Busca<int> busca, Edicao<int> edicao, Percorrer<int> percorrer) {
         this.busca = busca;
         this.edicao = edicao;
         this.percorrer = percorrer;
@@ -68,7 +70,7 @@ public class Menu
     private void InicializarArvore()
     {
         var valorRaiz = ObterInteiroEntrada("Digite o valor inteiro do nodo raíz da árvore: ");
-        arvore = new Arvore(valorRaiz);
+        arvore = new Arvore<int>(valorRaiz, new ComparadorInt());
     }
 
     public int PerguntarOpcao()
