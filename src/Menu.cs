@@ -1,4 +1,5 @@
 using ArvoreAvl.Comparadores;
+using ArvoreAvl.Operacoes;
 
 namespace ArvoreAvl;
 
