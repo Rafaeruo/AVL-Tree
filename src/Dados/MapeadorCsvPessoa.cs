@@ -17,7 +17,7 @@ public class MapeadorCsvPessoa : IMapeadorCsv<Pessoa>
                 Cpf = colunas[0],
                 Rg = colunas[1],
                 Nome = colunas[2],
-                DataNascimento = colunas[3],
+                DataNascimento = ObterData(colunas[3]),
                 CidadeNascimento = colunas[4]
             };
 
@@ -25,5 +25,11 @@ public class MapeadorCsvPessoa : IMapeadorCsv<Pessoa>
         }
 
         return pessoas;
+    }
+
+    private DateTime ObterData(string dataTexto)
+    {
+        var partes = dataTexto.Split("/");
+        return new DateTime(int.Parse(partes[2]), int.Parse(partes[1]), int.Parse(partes[0]));
     }
 }
