@@ -7,4 +7,9 @@ public record Pessoa
     public string Nome { get; set; }
     public DateTime DataNascimento { get; set; }
     public string CidadeNascimento { get; set; }
+
+    public override string ToString()
+    {
+        return $"{Nome} {Cpf} {DataNascimento:dd/MM/yyyy}";
+    }
 }

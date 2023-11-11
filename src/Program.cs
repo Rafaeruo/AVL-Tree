@@ -15,7 +15,6 @@ using ArvoreAvl.Operacoes;
 
 var busca = new Busca<Pessoa>();
 var edicao = new Edicao<Pessoa>(busca);
-var percorrer = new Percorrer<Pessoa>();
 var leitor = new LeitorCsv<Pessoa>(new MapeadorCsvPessoa());
 
-new Menu(busca, edicao, percorrer, leitor).Iniciar();
+new Menu(busca, edicao, leitor).Iniciar();

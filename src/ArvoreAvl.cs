@@ -8,7 +8,7 @@ public class Arvore<T>
         Comparador = comparador;
     }
 
-    public IComparer<T> Comparador; 
+    public IComparer<T> Comparador;
 
     public T Valor { get; set; }
     public Arvore<T> Esquerda { get; set; }
@@ -49,7 +49,7 @@ public class Arvore<T>
         {
             Console.Write(" ");
         }
-        Console.WriteLine(this);
+        Console.WriteLine("- " + this);
 
         Esquerda?.ExibirTabulacao(profundidade + 1);
         Direita?.ExibirTabulacao(profundidade + 1);

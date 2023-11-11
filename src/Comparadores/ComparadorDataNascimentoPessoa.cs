@@ -4,11 +4,11 @@ namespace ArvoreAvl.Comparadores;
 
 public class ComparadorDataNascimentoPessoa : IComparer<Pessoa>
 {
-    private readonly ComparadorString comparadorString;
+    private readonly ComparadorCpfPessoa comparadorCpfPessoa;
 
-    public ComparadorDataNascimentoPessoa(ComparadorString comparadorString)
+    public ComparadorDataNascimentoPessoa(ComparadorCpfPessoa comparadorCpfPessoa)
     {
-        this.comparadorString = comparadorString;
+        this.comparadorCpfPessoa = comparadorCpfPessoa;
     }
 
     public int Compare(Pessoa x, Pessoa y)
@@ -23,6 +23,6 @@ public class ComparadorDataNascimentoPessoa : IComparer<Pessoa>
             return -1;
         }
 
-        return 0;
+        return comparadorCpfPessoa.Compare(x, y);
     }
 }
