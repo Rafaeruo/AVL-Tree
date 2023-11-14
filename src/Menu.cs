@@ -29,7 +29,12 @@ public class Menu
 
     public void Iniciar()
     {
-        InicializarArvores();
+        var arvoresInicializadas = InicializarArvores();
+        
+        if (!arvoresInicializadas)
+        {
+            return;
+        }
         while (true) {
             var opcao = PerguntarOpcao();
 
@@ -113,15 +118,14 @@ public class Menu
         PercorrerIniciasNome(arvore.Direita, iniciaisNome);
     }
 
-    private void InicializarArvores()
+    private bool InicializarArvores()
     {
         var pessoas = leitorCsv.Ler().ToArray();
 
         if (!pessoas.Any())
         {
-            // TODO talvez retornar bool indicando falha.
             Console.WriteLine("Nenhuma pessoa no arquivo CSV");
-            return;
+            return false;
         }
 
         var comparadorString = new ComparadorString();
@@ -136,6 +140,8 @@ public class Menu
             arvoreNome = edicao.Inserir(arvoreNome, pessoas[i]);
             arvoreDataNascimento = edicao.Inserir(arvoreDataNascimento, pessoas[i]);
         }
+
+        return true;
     }
 
     public int PerguntarOpcao()
