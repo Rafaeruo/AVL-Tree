@@ -130,6 +130,10 @@ public class Menu
             PercorrerIniciasNome(arvore.Esquerda, iniciaisNome, pessoas);
             pessoas.Add(arvore.Valor);    
         }
+        else if (new ComparadorString().Compare(iniciaisNome, arvore.Valor.Nome) < 0)
+        {
+            PercorrerIniciasNome(arvore.Esquerda, iniciaisNome, pessoas);
+        }
         
         PercorrerIniciasNome(arvore.Direita, iniciaisNome, pessoas);
     }
