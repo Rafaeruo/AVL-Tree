@@ -52,13 +52,16 @@ public class Menu
             } 
             else if (opcao == 2) {
                 var iniciaisNome = ObterTextoEntrada("Digite as primeiras letras do nome: ");
-                PercorrerIniciasNome(arvoreNome, iniciaisNome);
+                var pessoas = new List<Pessoa>();
+                PercorrerIniciasNome(arvoreNome, iniciaisNome, pessoas);
+                ExibirPessoas(pessoas);
             }
             else if (opcao == 3) {
                 var dataInicial = ObterDataEntrada("Digite a data inicial (DD/MM/AAAA): ");
                 var dataFinal = ObterDataEntrada("Digite a data final (DD/MM/AAAA): ");
-                
-                PercorrerIntervaloDatas(arvoreDataNascimento, dataInicial, dataFinal);
+                var pessoas = new List<Pessoa>();
+                PercorrerIntervaloDatas(arvoreDataNascimento, dataInicial, dataFinal, pessoas);
+                ExibirPessoas(pessoas);
             }
             else if (opcao == 4) {
                 arvoreCpf.ExibirTabulacao();
@@ -81,7 +84,20 @@ public class Menu
         }
     }
 
-    public void PercorrerIntervaloDatas(Arvore<Pessoa> arvore, DateTime dataInicial, DateTime dataFinal)
+    public void ExibirPessoas(IEnumerable<Pessoa> pessoas)
+    {
+        if (!pessoas.Any())
+        {
+            Console.WriteLine("Nenhuma pessoa foi encontrada");
+        }
+
+        foreach (var pessoa in pessoas)
+        {
+            Console.WriteLine(pessoa);
+        }
+    }
+
+    public void PercorrerIntervaloDatas(Arvore<Pessoa> arvore, DateTime dataInicial, DateTime dataFinal, List<Pessoa> pessoas)
     {
         if (arvore is null)
         {
@@ -90,19 +106,19 @@ public class Menu
 
         if (arvore.Valor.DataNascimento >= dataInicial)
         {
-            PercorrerIntervaloDatas(arvore.Esquerda, dataInicial, dataFinal);    
+            PercorrerIntervaloDatas(arvore.Esquerda, dataInicial, dataFinal, pessoas);    
         }
 
         if (arvore.Valor.DataNascimento >= dataInicial && arvore.Valor.DataNascimento <= dataFinal)
         {
-            Console.WriteLine(arvore.Valor);
+            pessoas.Add(arvore.Valor);
 
         }
         
-        PercorrerIntervaloDatas(arvore.Direita, dataInicial, dataFinal);
+        PercorrerIntervaloDatas(arvore.Direita, dataInicial, dataFinal, pessoas);
     }
 
-     public void PercorrerIniciasNome(Arvore<Pessoa> arvore, string iniciaisNome)
+     public void PercorrerIniciasNome(Arvore<Pessoa> arvore, string iniciaisNome, List<Pessoa> pessoas)
     {
         if (arvore is null)
         {
@@ -111,11 +127,11 @@ public class Menu
 
         if (arvore.Valor.Nome.StartsWith(iniciaisNome, StringComparison.OrdinalIgnoreCase))
         {
-            PercorrerIniciasNome(arvore.Esquerda, iniciaisNome);
-            Console.WriteLine(arvore.Valor);    
+            PercorrerIniciasNome(arvore.Esquerda, iniciaisNome, pessoas);
+            pessoas.Add(arvore.Valor);    
         }
         
-        PercorrerIniciasNome(arvore.Direita, iniciaisNome);
+        PercorrerIniciasNome(arvore.Direita, iniciaisNome, pessoas);
     }
 
     private bool InicializarArvores()
@@ -167,9 +183,20 @@ public class Menu
 
     private DateTime ObterDataEntrada(string pergunta)
     {
-        var entrada = ObterTextoEntrada(pergunta);   
-        var partes = entrada.Split("/");
-        var data = new DateTime(int.Parse(partes[2]), int.Parse(partes[1]), int.Parse(partes[0]));
+        var entradaValida = false;
+        DateTime data = DateTime.MinValue;
+
+        while (!entradaValida)
+        {
+            var entrada = ObterTextoEntrada(pergunta);   
+            entradaValida = DateTime.TryParseExact(entrada, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out data);
+
+            if (!entradaValida)
+            {
+                Console.WriteLine("Data inválida");
+            }
+        }
+        
         return data;
     }
 
