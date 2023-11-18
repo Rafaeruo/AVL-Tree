@@ -1,15 +1,14 @@
-﻿// Autores:
-// Rafael Scholz Griebler
-// Andryll Rafael da Silva
-// Patrique Schwanck Rodrigues
-
-using ArvoreAvl;
-using ArvoreAvl.Csv;
-using ArvoreAvl.Dados;
+﻿using ArvoreAvl;
+using ArvoreAvl.Comparadores;
 using ArvoreAvl.Operacoes;
 
-var busca = new Busca<Pessoa>();
-var edicao = new Edicao<Pessoa>(busca);
-var leitor = new LeitorCsv<Pessoa>(new MapeadorCsvPessoa());
+var busca = new Busca<int>();
+var edicao = new Edicao<int>(busca);
+var nodo = new Arvore<int>(1, new ComparadorInt());
 
-new Menu(busca, edicao, leitor).Iniciar();
+nodo = edicao.Inserir(nodo, 10);
+var nodoEncontrado = busca.Buscar(nodo, 10);
+Console.WriteLine(nodoEncontrado);
+
+var percorrer = new Percorrer<int>();
+percorrer.PreOrdem(nodo);
