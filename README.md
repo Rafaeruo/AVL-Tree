@@ -1,6 +1,3 @@
-# Árvore AVL para busca de pessoas por valor e intervalos
+# Árvore AVL de busca
 
-### Arquivo CSV com pessoas
-
-O arquivo CSV com pessoas está localizado no caminho `src/Arquivos/pessoas.csv`. Caso seja necessário alterar o caminho sendo utilizado,
-o mesmo está definido no arquivo `src/Csv/LeitorCsv`, na propriedade `CaminhoArquivo`.
+Essa é uma implementação de uma árvore AVL de busca genérica, relizada para a cadeira de Algoritmos 3 da Unisinos.
